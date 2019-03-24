@@ -2,9 +2,7 @@ package model
 
 import (
 	"errors"
-	"fmt"
 	"github.com/abel1105/go_gin_boilerplate/db"
-	"github.com/gin-gonic/gin/json"
 )
 
 type Test struct {
@@ -20,8 +18,6 @@ func (Test) GetById(id string)(*Test, error) {
 
 	row := DB.QueryRow("SELECT * FROM tests WHERE id = ?;", id)
 	Test := &Test{}
-	test, _ := json.Marshal(row)
-	fmt.Println(string(test))
 	err := row.Scan(&Test.ID, &Test.Name)
 	if err != nil {
 		return nil, err
